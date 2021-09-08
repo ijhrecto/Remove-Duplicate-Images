@@ -49,15 +49,22 @@ def create_hashes(path, remove_fail):
     return fname_ls, hash_ls
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p","--path", default=os.getcwd(), type=str, help="directory of the images")
+    parser.add_argument("-r","--remove_fail", default=True, type=bool, help="remove image if it can not be read, (True or False)")
+    args = parser.parse_args()
+
     # change the folder location
     # have all your photos be in one folder
-    img_folder = "images"
-    path = os.path.join(os.getcwd(), img_folder)
+    # img_folder = "images"
+    # path = os.path.join(os.getcwd(), img_folder)
+    path = args.path
+    remove_fail = args.remove_fail
 
     # creates hashes using percetion hashing
     # yields the file list and their respective hashes
     # remove_fail, deletes files which are not able to be read by PIL
-    files, hashes = create_hashes(path, remove_fail=True)
+    files, hashes = create_hashes(path, remove_fail)
 
     # returns unique files based on hashes
     # disregards subsequent hashes/file if hash already exists
@@ -65,6 +72,7 @@ def main():
 
     # needs path, list of all files, and uniques files not to be removed
     remove_images(path, files, unique_files)
+
 
 if __name__ == "__main__":
     main()
