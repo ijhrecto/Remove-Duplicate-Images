@@ -7,6 +7,10 @@ Remove duplicate images using perceptual hashing
 4. creates the hashes, gets the first unique hash, and lists the files mapped from the hashes
 5. deletes the files not listed as unique files
 
+## ArgParse
+1. (-p) Path - Director of the images
+2. (-r) Remove Fail - True or False
+
 ## Dependencies
 PIL
 imagehash
